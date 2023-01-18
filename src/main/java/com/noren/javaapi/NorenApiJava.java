@@ -180,6 +180,35 @@ public class NorenApiJava {
         JSONObject jsonResp = new JSONObject(response);
         return jsonResp; 
     }
+    
+    public JSONArray get_time_price_series(String exchange, String token, String starttime, Object endtime, Object interval){
+        String url = _api.routes.get("timepriceseries");
+        if (starttime == null) {
+            starttime = Long.toString(System.currentTimeMillis()/ 1000);
+        }
+        JSONObject jsonObject = new JSONObject();
+        
+        jsonObject.put("uid", _userid);
+        jsonObject.put("exch", exchange);
+        jsonObject.put("token", token);
+        jsonObject.put("st", starttime);
+        if (endtime != null) {
+            jsonObject.put("et", endtime);
+        }
+        if (interval != null) {
+            jsonObject.put("intrv", interval);
+        }
+        
+     String response = _api.post(url, _key, jsonObject);
+        System.out.println(response);
+        if(response.charAt(0) == '[')
+        {
+            JSONArray jsonResp = new JSONArray(response);
+            return jsonResp;
+        }
+        return null;         
+    }
+    
     //public static void main(String[] args) {
     //    System.out.println("Hello and Welcom to Noren World!");
     //    NorenApiJava api = new NorenApiJava("http://kurma.kambala.co.in:9959/NorenWClient/");
