@@ -24,6 +24,7 @@ public class NorenRoutes {
            put("placeorder", "/PlaceOrder");
            put("modifyorder", "/ModifyOrder");
            put("cancelorder", "/CancelOrder");
+           put("timepriceseries", "/TPSeries");
         }};
        }
        public String get(String key){
