@@ -81,6 +81,17 @@ public class NorenApiJava {
         return null;       
     }
     
+    public JSONObject forgotpassword_OTP(String userid, String pan){
+        String url = _api.routes.get("forgotpassword_OTP");
+        JSONObject jsonObject = new JSONObject();
+        
+        jsonObject.put("uid", userid);
+        jsonObject.put("pan",pan);
+        String response = _api.post(url, _key, jsonObject);
+        JSONObject jsonResp = new JSONObject(response);
+        return jsonResp;   
+    }
+    
     public JSONArray get_trade_book(){
         String url = _api.routes.get("tradebook");
         JSONObject jsonObject = new JSONObject();
