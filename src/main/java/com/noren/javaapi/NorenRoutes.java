@@ -25,6 +25,7 @@ public class NorenRoutes {
            put("modifyorder", "/ModifyOrder");
            put("cancelorder", "/CancelOrder");
            put("timepriceseries", "/TPSeries");
+           put("forgotpassword_OTP", "/FgtPwdOTP"); 
         }};
        }
        public String get(String key){
