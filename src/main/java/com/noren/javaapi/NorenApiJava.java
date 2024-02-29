@@ -134,7 +134,7 @@ public class NorenApiJava {
         jsonObject.put("tsym"    ,_api.encodeValue(tradingsymbol));
         jsonObject.put("qty"     ,Integer.toString(quantity));
         jsonObject.put("dscqty"  ,Integer.toString(discloseqty));
-        jsonObject.put("prctyp"  ,"price_type");
+        jsonObject.put("prctyp"  ,price_type);
         jsonObject.put("prc"     ,Double.toString(price));
         if(null != trigger_price)
             jsonObject.put("trgprc"  ,Double.toString(trigger_price));
