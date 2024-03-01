@@ -118,6 +118,22 @@ public class NorenApiJava {
         return null;         
     }
     
+    public JSONArray get_position_book(){
+        String url = _api.routes.get("positionbook");
+        JSONObject jsonObject = new JSONObject();
+        
+        jsonObject.put("uid", _userid);
+        jsonObject.put("actid", _actid);
+        String response = _api.post(url, _key, jsonObject);
+        System.out.println(response);
+        if(response.charAt(0) == '[')
+        {
+            JSONArray jsonResp = new JSONArray(response);
+            return jsonResp;
+        }
+        return null;         
+    }
+    
     public JSONObject place_order(String buy_or_sell,String product_type,
                     String exchange,String tradingsymbol,Integer quantity,Integer discloseqty,
                     String price_type,Double price,String remarks,Double trigger_price,
