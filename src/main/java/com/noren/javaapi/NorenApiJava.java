@@ -91,6 +91,19 @@ public class NorenApiJava {
         JSONObject jsonResp = new JSONObject(response);
         return jsonResp;   
     }
+    
+        public JSONObject get_quotes(String userid, String exch,String token){
+        String url = _api.routes.get("get_quotes");
+        JSONObject jsonObject = new JSONObject();
+        
+        jsonObject.put("uid", userid);
+        jsonObject.put("exch",exch);
+        jsonObject.put("token",token);
+        String response = _api.post(url, _key, jsonObject);
+        JSONObject jsonResp = new JSONObject(response);
+        return jsonResp;   
+    }
+        
      public JSONObject get_limits(String uid, String actid){
         String url = _api.routes.get("get_limits");
         JSONObject jsonObject = new JSONObject();
