@@ -28,6 +28,7 @@ public class NorenRoutes {
            put("forgotpassword_OTP", "/FgtPwdOTP"); 
            put("get_limits", "/Limits"); 
            put("positionbook", "/PositionBook"); 
+           put("get_quotes", "/GetQuotes"); 
         }};
        }
        public String get(String key){
