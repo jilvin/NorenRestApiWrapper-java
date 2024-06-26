@@ -4,18 +4,29 @@
  */
 
 package com.noren.javaapi;
+
 //package okhttp3.guide;
+import java.net.URI;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.java_websocket.client.WebSocketClient;
+import org.java_websocket.handshake.ServerHandshake;
+import java.net.URI;
+import com.noren.javaapi.NorenCallback;
+import com.noren.javaapi.NorenWebsocketClient;
+
 /**
  *
  * @author itsku
  */
 public class NorenApiJava {    
     String _host;
+    String _websocketURL;
     NorenRequests _api;
-    public NorenApiJava(String host){
+    NorenWebsocketClient _wsclient;
+    public NorenApiJava(String host,String websocketURL){
         _host = host;
+        _websocketURL=websocketURL;
         _api = new NorenRequests(host);
     }
     private String _userid;    
@@ -258,7 +269,48 @@ public class NorenApiJava {
         }
         return null;         
     }
+    public  void startwebsocket(NorenCallback appcallback) {
+        try {
+            // Create WebSocket client instance and establish the connection
+            _wsclient = new NorenWebsocketClient(new URI(_websocketURL),appcallback);
+            _wsclient.connectBlocking(); // Wait until the connection is established
+      
+            // Send a message to the WebSocket server for login
+            _wsclient.send("{\"uid\":\"" + _userid + "\",\"actid\":\"" + _userid + "\",\"source\":\"API\",\"susertoken\":\"" + _key + "\",\"t\":\"c\"}");
+
+        } catch (Exception e) {
+            System.err.println("Error during WebSocket connection and message sending: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
     
+    public  void subscribe(String value) {
+        try {
+            
+            // Send a message to the WebSocket server for subscription feed
+           _wsclient.send("{\"t\":\"t\", \"k\":\"" + value + "\"}");
+        } catch (Exception e) {
+            System.err.println("Error during WebSocket connection and message sending: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    public  void unsubscribe(String value) {
+        try {
+            
+            // Send a message to the WebSocket server for subscription feed
+           _wsclient.send("{\"t\":\"u\", \"k\":\"" + value + "\"}");
+        } catch (Exception e) {
+            System.err.println("Error during WebSocket connection and message sending: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+   
+}
+
+    
+
     //public static void main(String[] args) {
     //    System.out.println("Hello and Welcom to Noren World!");
     //    NorenApiJava api = new NorenApiJava("http://kurma.kambala.co.in:9959/NorenWClient/");
@@ -279,4 +331,4 @@ public class NorenApiJava {
     //    if(book != null)
     //        System.out.println(book.toString());       
     //}   
-}
+
