@@ -158,6 +158,30 @@ public class NorenApiJava {
         return null;         
     }
     
+    public JSONObject get_Basket_Margin(MainData basket){
+        String url = _api.routes.get("get_BasketMargin");
+        JSONObject jsonObject = new JSONObject();
+        
+        jsonObject.put("uid", _userid);
+        jsonObject.put("actid", _actid);
+        jsonObject.put("exch", basket.exch);
+        jsonObject.put("tsym", basket.tsym);
+        jsonObject.put("qty", Integer.toString(basket.qty));
+        jsonObject.put("prc", String.valueOf(basket.prc));
+        jsonObject.put("prd", basket.prd);
+        jsonObject.put("trantype", basket.trantype);
+        jsonObject.put("prctyp", basket.prctyp);
+        if(basket.basketlists.isEmpty()== false){
+           
+          jsonObject.put("basketlists", basket.toString());     
+        }
+           
+           
+        String response = _api.post(url, _key, jsonObject);
+        JSONObject jsonResp = new JSONObject(response);
+        return jsonResp;        
+    }
+    
     public JSONObject place_order(String buy_or_sell,String product_type,
                     String exchange,String tradingsymbol,Integer quantity,Integer discloseqty,
                     String price_type,Double price,String remarks,Double trigger_price,
