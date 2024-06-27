@@ -29,6 +29,7 @@ public class NorenRoutes {
            put("get_limits", "/Limits"); 
            put("positionbook", "/PositionBook"); 
            put("get_quotes", "/GetQuotes"); 
+           put("get_BasketMargin", "/GetBasketMargin"); 
         }};
        }
        public String get(String key){
