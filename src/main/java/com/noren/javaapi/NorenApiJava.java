@@ -250,7 +250,7 @@ public class NorenApiJava {
             
         }
         //if cover order or high leverage order
-        if (newtrigger_price != null)
+        if (bookloss_price != null)
             jsonObject.put("blprc"  ,Double.toString(bookloss_price));
         
         //trailing price
